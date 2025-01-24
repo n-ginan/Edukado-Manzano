@@ -26,26 +26,44 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Edukado Manzano'),
+        title: const Text(
+          'Edukado Manzano',
+        ),
+        centerTitle: true,
         titleTextStyle: const TextStyle(
           fontSize: 24,
-          color: Color.fromRGBO(255, 249, 102, 1.0)
+          color: Color.fromRGBO(255, 249, 102, 1.0),
         ),
         backgroundColor: const Color.fromRGBO(40, 42, 54, 1.0),
       ),
       backgroundColor: const Color.fromRGBO(40, 42, 54, 1.0),
-      body: const Column(
-        children: [
-          Text(
-            "This is the data",
-            style: TextStyle(
-              color: Color.fromRGBO(255, 249, 102, 1.0)
-            )
-          )
-        ], // Children
+      body: ListView(
+          children: const <Widget>[
+            ListTile(
+              title: Text(
+                "MIS",
+                style: TextStyle(
+                    color: Color.fromRGBO(255, 249, 102, 1.0)
+                ),
+              ),
+            ),
+            Divider(
+              color: Colors.grey,
+              thickness: 1,
+              height: 5,
+            ),
+            ListTile(
+              title: Text(
+                "Testing",
+                style: TextStyle(
+                    color: Color.fromRGBO(255, 249, 102, 1.0)
+                ),
+              ),
+            ),
+          ], // Children
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: const Color.fromRGBO(40, 42, 54, 1.0),
+        backgroundColor: const Color.fromRGBO(40, 42, 54, 0.5),
         tooltip: "Increment",
         child: const Icon(
           Icons.add,
@@ -56,6 +74,5 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
-
 }
 
