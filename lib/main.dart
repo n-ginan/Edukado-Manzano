@@ -9,6 +9,10 @@ const Color finalFontColor = Color.fromRGBO(255, 249, 102, 1.0);
 const Color finalFabColor = Color.fromRGBO(40, 42, 54, 0.5);
 const Color finalHintColor = Color.fromRGBO(255, 249, 102, 0.5);
 
+SizedBox spaceBetween(double space) {
+  return SizedBox(height: space);
+}
+
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -89,11 +93,13 @@ class HomeScreen extends StatelessWidget {
 class CreateDeck extends StatelessWidget {
   const CreateDeck({super.key});
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Create Deck"),
+        iconTheme: const IconThemeData(color: finalFontColor),
         backgroundColor: finalBackgroundColor,
         titleTextStyle: const TextStyle(
           fontSize: 24,
@@ -109,7 +115,7 @@ class CreateDeck extends StatelessWidget {
             spaceBetween(10),
             deckNameTextBox(),
             spaceBetween(60),
-            proceedButton()
+            proceedButton(context)
           ],
         ),
       )
@@ -127,12 +133,17 @@ class CreateDeck extends StatelessWidget {
     );
   }
 
-  SizedBox proceedButton() {
+  SizedBox proceedButton(BuildContext context) {
     return SizedBox(
       height: 50,
       width: 400,
       child: ElevatedButton(
-        onPressed: (){ },
+        onPressed: (){
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const CreateCards())
+          );
+        },
         style: ButtonStyle(
             backgroundColor: const WidgetStatePropertyAll(finalFontColor),
             shape: WidgetStatePropertyAll(
@@ -183,8 +194,87 @@ class CreateDeck extends StatelessWidget {
     );
   }
 
-  SizedBox spaceBetween(double space) {
-    return SizedBox(height: space);
+}
+
+class CreateCards extends StatelessWidget {
+  const CreateCards({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Create Cards"),
+        iconTheme: const IconThemeData(color: finalFontColor),
+        titleTextStyle: const TextStyle(
+          fontSize: 24,
+          color: finalFontColor
+        ),
+        backgroundColor: finalBackgroundColor,
+      ),
+      backgroundColor: finalBackgroundColor,
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          spaceBetween(60),
+          questionCard(),
+          spaceBetween(30),
+          answerCards()
+        ],
+      ),
+    );
+  }
+
+  Container questionCard() {
+    return Container(
+      alignment: Alignment.center,
+        child: const SizedBox(
+      height: 270,
+      width: 400,
+      child: TextField(
+        decoration: InputDecoration(
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: finalFontColor
+            ),
+            borderRadius: BorderRadius.all(Radius.circular(15.0))
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: finalFontColor
+            ),
+            borderRadius: BorderRadius.all(Radius.circular(15.0))
+          ),
+          hintText: "Question",
+          hintStyle: TextStyle(
+            color: finalHintColor,
+          )
+        ),
+        style: TextStyle(
+          fontSize: 18,
+          color: finalFontColor
+        ),
+        textAlign: TextAlign.center,
+        expands: true,
+        minLines: null,
+        maxLines: null,
+      )
+    )
+    );
+  }
+
+  Container answerCards() {
+    return Container(
+      padding: const EdgeInsets.all(10.0),
+      height: 170,
+      width: 400,
+      decoration: BoxDecoration(
+        shape: BoxShape.rectangle,
+        border: Border.all(
+          color: finalFontColor,
+        ),
+        borderRadius: const BorderRadius.all(Radius.circular(10))
+      ),
+    );
   }
 }
 
